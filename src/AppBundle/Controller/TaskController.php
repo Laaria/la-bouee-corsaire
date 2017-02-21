@@ -202,7 +202,7 @@
 		/**
 		 * Disable the Task identified by the given ID
 		 *
-		 * @Route("/disable/{id}")
+		 * @Route("/disable/{id}", name="task_disable")
 		 *
 		 * @param Request $request
 		 * @param int     $id
