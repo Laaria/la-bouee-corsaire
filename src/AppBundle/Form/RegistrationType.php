@@ -18,6 +18,7 @@
 		public function buildForm(FormBuilderInterface $builder, array $options) {
 			parent::buildForm($builder, $options);
 			$builder
+				->remove('username')
 				->add('email', null, array(
 					'translation_domain' => 'FOSUserBundle',
 					'label' => 'form.email',

@@ -314,6 +314,7 @@
 			$length = strlen($email);
 			if ($length >= 3 && $length <= 180 && preg_match('/.*@.*/', $email)) {
 				parent::setEmail($email);
+				$this->setUsername($email);
 			}
 
 			return $this;
