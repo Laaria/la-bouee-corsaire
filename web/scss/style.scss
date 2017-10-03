@@ -54,6 +54,9 @@ body {
 	.navbar-brand:hover {
 		color: $input_border;
 	}
+	.navbar-nav > li {
+		display: flex;
+	}
 	.navbar-nav > li > a {
 		color: $input_border;
 	}

@@ -22,6 +22,8 @@
 							Panneau d’administration
 						</a>
 					{% else %}
+						<a class="btn btn-primary btn-lg" href="{{ path('task_list_owned') }}">Mes Besoins</a>
+						<a class="btn btn-primary btn-lg" href="{{ path('transaction_list') }}">Mes Transactions</a>
 						<a class="btn btn-primary btn-lg" href="{{ path('fos_user_profile_show') }}">
 							Mon Profil
 						</a>
