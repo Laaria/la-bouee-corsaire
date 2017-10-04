@@ -64,7 +64,7 @@
 				])
 				->add('phone', null, [
 					'translation_domain' => false,
-					'label' => 'Téléphone (optionnel)',
+					'label' => 'Téléphone',
 				]);
 			}
 
