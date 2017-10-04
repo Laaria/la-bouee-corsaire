@@ -58,6 +58,10 @@
 					'translation_domain' => false,
 					'label' => 'Région',
 				])
+				->add('zip_code', null, [
+					'translation_domain' => false,
+					'label' => 'Code Postal',
+					])
 				->add('city', null, [
 					'translation_domain' => false,
 					'label' => 'Ville',

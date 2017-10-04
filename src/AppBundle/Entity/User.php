@@ -104,6 +104,8 @@
 		 * @var    string
 		 * @access protected
 		 */
+		protected $zip_code;
+
 		protected $region;
 
 		/**
@@ -193,9 +195,16 @@
 		public function getRegion() { return $this->region; }
 
 		/**
+		 * Return zip code
+		 *
+		 * @return integer
+		 */
+		public function getZipCode() { return $this->zip_code; }
+
+		/**
 		 * Return city
 		 *
-		 * @return string
+		 * @return integer
 		 */
 		public function getCity() { return $this->city; }
 
@@ -320,6 +329,22 @@
 			return $this;
 		}
 
+		/**
+		 * Set Zip code
+		 *
+		 * @param string $zip_code
+		 * 
+		 * @return User
+		 */
+		public function setZipCode($zip_code) {
+			$zip_code = (integer) $zip_code;
+
+			$length = strlen($zip_code);
+			if ($length == 5) {
+				$this->zip_code = $zip_code;
+			}
+			return $this;
+		}
 		/**
 		 * Set region
 		 *
