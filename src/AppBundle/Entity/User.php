@@ -5,7 +5,6 @@
 	use Doctrine\ORM\Mapping as ORM;
 	use FOS\UserBundle\Model\User as BaseUser;
 	use Symfony\Component\Validator\Constraints as Assert;
-
 	/**
 	 * Registered Users
 	 *
@@ -197,7 +196,6 @@
 		/**
 		 * Return zip code
 		 *
-		 * @return integer
 		 * @return string
 		 */
 		public function getZipCode() { return $this->zip_code; }
@@ -338,15 +336,11 @@
 		 * @return User
 		 */
 		public function setZipCode($zip_code) {
-			$zip_code = (integer) $zip_code;
-
-			$length = strlen($zip_code);
-			if ($length == 5) {
 			$zip_code = (string) $zip_code;
 			$regex = preg_match( '/\b[0-9][0-9]{4}\b/', $zip_code);
 				 if ($regex == true){
-				$this->zip_code = $zip_code;
-			}
+					$this->zip_code = $zip_code;
+				 }
 			return $this;
 		}
 		/**
