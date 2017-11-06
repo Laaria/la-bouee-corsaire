@@ -5,6 +5,7 @@
 	use Symfony\Component\Form\AbstractType;
 	use Symfony\Component\Form\FormBuilderInterface;
 	use FOS\UserBundle\Util\LegacyFormHelper;
+	use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 	/**
 	 * Base used by all forms related to Users creation/edition
@@ -63,6 +64,7 @@
 					'label' => 'Code Postal',
 					])
 				->add('city', null, [
+					'attr' => ['readonly'=> true],
 					'translation_domain' => false,
 					'label' => 'Ville',
 				])
