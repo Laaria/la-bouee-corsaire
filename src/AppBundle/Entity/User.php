@@ -103,9 +103,27 @@
 		 * @var    string
 		 * @access protected
 		 */
-		protected $zip_code;
-
 		protected $region;
+
+		/**
+		 * Zip Code
+		 *
+		 * @ORM\Column(type="string", length=5)
+		 *
+		 * @Assert\NotBlank(message="Veuillez entrer votre code postal.", groups={"Registration", "Profile"})
+		 *
+		 * @Assert\Length(
+		 * 	min=5,
+		 * 	max=5,
+		 * 	minMessage="Le code postal est trop court.",
+		 * 	maxMessage="Le code postal est trop long.",
+		 * 	groups={"Registration", "Profile"}
+		 * )
+		 *
+		 * @var    string
+		 * @access protected
+		 */
+		protected $zip_code;
 
 		/**
 		 * City
