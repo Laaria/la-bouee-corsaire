@@ -56,10 +56,12 @@
 					'label' => 'Adresse',
 				])
 				->add('region', null, [
+					'attr' => ['readonly' => true],
 					'translation_domain' => false,
 					'label' => 'Région',
 				])
 				->add('zip_code', null, [
+					'attr' => ['readonly' => true],
 					'translation_domain' => false,
 					'label' => 'Code Postal',
 					])
