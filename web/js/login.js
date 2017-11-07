@@ -35,39 +35,9 @@ $('.register-submit').on('click', function(event){
 	}
 	registerStep++;
 });
-
-$('#fos_user_registration_form_zip_code').autocomplete({
-	minlength : 3,
-	source : function(requete, reponse){
-		var input = $('#fos_user_registration_form_zip_code').val();
-		$.ajax({
-			type: 'GET',
-			url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
-			datatype: 'json',
-			data: {
-				"dataset": "laposte_hexasmal",
-				"q": input,
-				"facet": [
-				"nom_de_la_commune",
-				"code_postal"
-				],
-
-			},
-			success: function (res){
-				console.log(res);
-				reponse($.map(res.records, function(objet){
-					return objet.nom_de_la_commune;
-				}));
-			}
-		});
-	}
-});
-
-$('#fos_user_registration_form_zip_code').keyup(function() {
-	var input = $('#fos_user_registration_form_zip_code').val();
-	if (input.length < 3) {
-		console.log(input);
-	} else {
+$('#fos_user_registration_form_adress').keyup(function() {
+	var input = $('#fos_user_registration_form_adress').val();
+	if (input.length > 3){
 		zipCaller(input);
 	}
 });
@@ -76,55 +46,39 @@ function zipCaller(input) {
 	$.ajax({
 
 		type: 'GET',
-
-		url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
-
-		data: {
-
-			"dataset": "laposte_hexasmal",
-
-			"q": input,
-
-			"facet": [
-
-			"nom_de_la_commune",
-
-			"code_postal"
-
-			]
-		},
-
+			url: 'https://api-adresse.data.gouv.fr/search',
+			datatype: 'json',
+			data: {
+				"q": input
+			},
 		success: function(res) {
-			console.log(res);
-			var datas = res['records'];
-			let city = [];
+			var datas = res.features;
+			let adress = [];
 			for (var i = 0; i < datas.length; i++) {
-				city.push({
-					label: datas[i]['fields']['code_postal'],
-					value: datas[i]['fields']['nom_de_la_commune']
-
+				adress.push({
+					name: datas[i].properties.label,
+					label: datas[i].properties.name,
+					zipCode: datas[i].properties.postcode,
+					city: datas[i].properties.city,
+					area: datas[i].properties.context.split(',')[2]
 				});
 			}
-
-			console.log(city);
-			$('#fos_user_registration_form_zip_code').autocomplete({
-
-				minLength: 3,
-				source: city,
-				focus: function(event, ui) {
-					$("#fos_user_registration_form_zip_code").val(ui.item.label);
-					return false;
-				},
-				select: function(event, ui) {
-					$("#fos_user_registration_form_zip_code").val(ui.item.label);
-					$("#fos_user_registration_form_city").val(ui.item.value);
-					return false;
+			console.log(adress);
+			$('#fos_user_registration_form_adress').autocomplete({
+				source: adress,
+			
+				select: function (event, ui){
+					$('#fos_user_registration_form_adress').val(ui.item.label);
+					$('#fos_user_registration_form_region').val(ui.item.area);
+					$('#fos_user_registration_form_zip_code').val(ui.item.zipCode);
+					$('#fos_user_registration_form_city').val(ui.item.city);
 				}
-			}).autocomplete("instance")._renderItem = function(ul, item) {
-				return $("<li>")
-				.append("<div>" + item.value + "</div>")
-				.appendTo(ul);
-			}
+			}).autocomplete( "instance" )._renderItem = function( ul, item ) {
+				return $( "<li>" )
+					.append( "<div>" + item.name + "</div>" )
+					.appendTo( ul );
+				};
+			
 		}
 	});
 }
