@@ -36,7 +36,12 @@
 									<a href="{{ path('task_edit', {'id': task.id}) }}" data-original-title="Edition"
 									 data-toggle="tooltip" type="button" class="btn btn-md btn-warning">
 										<i class="glyphicon glyphicon-edit"></i>
-										Édition
+										Éditer
+									</a>
+									<a href="{{ path('task_duplicate', {'id': task.id}) }}" data-original-title="Edition"
+									 data-toggle="tooltip" type="button" class="btn btn-md btn-warning">
+										<i class="glyphicon glyphicon-edit"></i>
+										Dupliquer
 									</a>
 								{% endif %}
 
