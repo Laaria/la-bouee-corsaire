@@ -115,7 +115,7 @@
 		 * @var    boolean
 		 * @access protected
 		 */
-		protected $isService;
+		protected $isService = true;
 
 		/**
 		 * Required level of expertise
