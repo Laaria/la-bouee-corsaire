@@ -107,6 +107,39 @@
 			]);
 		}
 
+
+		/**
+		 * Show a form allowing creation of a new Task owned by the current User
+		 *
+		 * @Route("/new/demand", name="task_new-demand")
+		 *
+		 * @param Request $request
+		 *
+		 * @return Response
+		 */
+		public function newDemand(Request $request) {
+			$user = $this->getAuthenticatedUser();
+
+			$formFactory = $this->get('form.factory');
+
+			$task = new Task;
+			$form = $formFactory->createNamed(
+				'new_task',
+				'AppBundle\Form\TaskType',
+				$task
+			);
+
+			$form->handleRequest($request);
+			if ($form->isSubmitted() && $form->isValid()) {
+				return $this->saveTask($form->getData());
+			}
+
+			return $this->render('task/new-demand.html.twig', [
+				'form' => $form->createView(),
+				'task' => $task,
+			]);
+		}
+
 		/**
 		 * Show full list of Tasks
 		 *
