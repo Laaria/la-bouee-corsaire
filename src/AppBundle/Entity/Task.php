@@ -108,6 +108,16 @@
 		protected $date;
 
 		/**
+		 * Status (true -> Services / false -> Besoins)
+		 *
+		 * @ORM\Column(type="boolean")
+		 *
+		 * @var    boolean
+		 * @access protected
+		 */
+		protected $isService;
+
+		/**
 		 * Required level of expertise
 		 *
 		 * @ORM\Column(type="TaskLevelType", nullable=false, options={"default"="0"})
