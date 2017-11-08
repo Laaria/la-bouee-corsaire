@@ -5,6 +5,8 @@
 	use Symfony\Component\Form\AbstractType;
 	use Symfony\Component\Form\FormBuilderInterface;
 	use Symfony\Component\OptionsResolver\OptionsResolver;
+	use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+
 
 	/**
 	 * Form used to generate and edit Tasks
@@ -53,6 +55,9 @@
 				->add('description', null, [
 					'translation_domain' => false,
 					'label' => 'Informations complémentaires',
+				])
+				->add('is_service', HiddenType::class, [
+					'data' => 0
 				]);
 		}
 
