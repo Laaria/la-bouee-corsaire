@@ -177,6 +177,15 @@
 		 */
 		public function getLevel() { return $this->level; }
 
+
+		/**
+		 * Return type of service (Besoins/Services)
+		 *
+		 * @return string
+		 */
+		public function getIsService() { return $this->isService; }
+
+
 		/**
 		 * Set description
 		 *
@@ -270,6 +279,17 @@
 					break;
 			}
 
+			return $this;
+		}
+		/**
+		 * Set type of Service (Besoins/Service)
+		 *
+		 * @param string
+		 *
+		 * @return Task
+		 */
+		public function setIsService($isService) {
+			$this->isService = $isService;
 			return $this;
 		}
 
