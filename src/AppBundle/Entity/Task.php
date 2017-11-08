@@ -311,6 +311,22 @@
 			return $task;
 		}
 
+		/**
+		 * Build a new Task instance based on existing one
+		 *
+		 * Remove ID and date from previous Task
+		 *
+		 * @return Task
+		*/
+		public function duplicate(){
+			$task = new Task();
+			$task->setUser($this->getUser())
+				->setTitle($this->getTitle())
+				->setDescription($this->getDescription())
+				->setLocation($this->getLocation())
+				->setLevel($this->getLevel());
+			return $task;
+		}
 	}
 
 ?>

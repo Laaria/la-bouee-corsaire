@@ -231,6 +231,41 @@
 				'task' => $task,
 			]);
 		}
+		
+		/**
+		 * Show a form allowing duplication of the Task identified by the given ID
+		 *
+		 * @Route("/duplicate/{id}", name="task_duplicate")
+		 *
+		 * @param Request $request
+		 * @param int     $id
+		 *
+		 * @return Response
+		 */
+		public function duplicateAction(Request $request, $id) {
+			$user = $this->getAuthenticatedUser();
+			$task = $this->getById('Task', $id);
+			$this->checkOwnership($task);
+
+			$duplicated_task = $task->duplicate();
+			$formFactory = $this->get('form.factory');
+			$form = $formFactory->createNamed(
+				'new_task',
+				'AppBundle\Form\TaskType',
+				$duplicated_task
+			);
+			
+			$form->handleRequest($request);
+			if ($form->isSubmitted() && $form->isValid()) {
+				
+				return $this->saveTask($form->getData());
+			}
+
+			return $this->render('task/duplicate.html.twig', [
+				'form' => $form->createView(),
+				'task' => $task,
+			]);
+		}
 
 		/**
 		 * Disable the Task identified by the given ID
