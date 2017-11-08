@@ -408,7 +408,7 @@
 			$phone = (string) $phone;
 
 			$length = strlen($phone);
-			if ($length >= 3 && $length <= 20) {
+			if ($length == 10) {
 				$this->phone = $phone;
 			}
 
