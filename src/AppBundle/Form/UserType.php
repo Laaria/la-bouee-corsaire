@@ -51,6 +51,11 @@
 					'translation_domain' => 'FOSUserBundle',
 					'label' => 'form.email',
 				])
+				->add('sponsor', null, [
+					'attr' => ['readonly' => true],
+					'translation_domain' => false,
+					'label' => 'Parrain',
+				])
 				->add('adress', null, [
 					'translation_domain' => false,
 					'label' => 'Adresse',

@@ -184,6 +184,16 @@
 		protected $hoursDebit = 0;
 
 		/**
+		 * Sponsor (required)
+		 *
+		 * @ORM\Column(type="string", length=20, nullable=true, options={"default"=null})
+		 *
+		 * @var    string
+		 * @access protected
+		 */
+		protected $sponsor;
+
+		/**
 		 * Return name
 		 *
 		 * @return string
@@ -251,8 +261,17 @@
 		 *
 		 * @return float
 		 */
-		public function getHours() { 
+		public function getHours() {
 			return ($this->hoursCredit - $this->hoursDebit);
+		}
+
+		/**
+		 * Return Sponsor
+		 *
+		 * @return float
+		 */
+		public function getSponsor() {
+			return $this->sponsor;
 		}
 
 		/**
@@ -350,7 +369,7 @@
 		 * Set Zip code
 		 *
 		 * @param string $zip_code
-		 * 
+		 *
 		 * @return User
 		 */
 		public function setZipCode($zip_code) {
@@ -446,6 +465,12 @@
 				$this->hoursDebit = $hours;
 			}
 
+			return $this;
+		}
+
+		public function setSponsor($sponsor){
+			$sponsor = (string) $sponsor;
+			$this->sponsor = $sponsor;
 			return $this;
 		}
 
