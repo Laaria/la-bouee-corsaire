@@ -4,10 +4,12 @@
 
 	use AppBundle\Entity\Task;
 	use AppBundle\Entity\User;
+	use AppBundle\Entity\StatusTrait;
 	use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 	use Symfony\Component\HttpFoundation\RedirectResponse;
 	use Symfony\Component\HttpFoundation\Request;
 	use Symfony\Component\HttpFoundation\Response;
+	use Psr\Log\LoggerInterface;
 
 	/**
 	 * Task-related operations
@@ -109,15 +111,16 @@
 
 
 		/**
-		 * Show a form allowing creation of a new Task owned by the current User
+		 * Show a form allowing creation of a new Demand owned by the current User
 		 *
-		 * @Route("/new/demand", name="task_new-demand")
+		 * @Route("/new/demand", name="task_new_demand")
 		 *
 		 * @param Request $request
 		 *
 		 * @return Response
 		 */
 		public function newDemand(Request $request) {
+
 			$user = $this->getAuthenticatedUser();
 
 			$formFactory = $this->get('form.factory');
@@ -125,7 +128,7 @@
 			$task = new Task;
 			$form = $formFactory->createNamed(
 				'new_task',
-				'AppBundle\Form\TaskType',
+				'AppBundle\Form\DemandType',
 				$task
 			);
 
@@ -152,12 +155,20 @@
 				->getDoctrine()
 				->getRepository('AppBundle:Task')
 				->findBy(
-					['enabled' => true],
+					['isService' => false, 'enabled' => true],
+					['date' => 'DESC']
+				);
+			$demands = $this
+				->getDoctrine()
+				->getRepository('AppBundle:Task')
+				->findBy(
+					['enabled' => true, 'isService' => true],
 					['date' => 'DESC']
 				);
 
 			return $this->render('task/list.html.twig', [
 				'tasks' => $tasks,
+				'demands' => $demands,
 				'user' => $this->getUser(),
 			]);
 		}
@@ -228,10 +239,10 @@
 
 			return $this->render('task/edit.html.twig', [
 				'form' => $form->createView(),
-				'task' => $task,
+				'task' => $task
 			]);
 		}
-		
+
 		/**
 		 * Show a form allowing duplication of the Task identified by the given ID
 		 *
@@ -254,10 +265,10 @@
 				'AppBundle\Form\TaskType',
 				$duplicated_task
 			);
-			
+
 			$form->handleRequest($request);
 			if ($form->isSubmitted() && $form->isValid()) {
-				
+
 				return $this->saveTask($form->getData());
 			}
 
@@ -313,6 +324,8 @@
 				'id' => $id
 			]);
 		}
+
+
 
 	}
 
