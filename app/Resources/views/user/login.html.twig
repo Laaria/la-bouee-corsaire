@@ -22,14 +22,14 @@
 		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 	{% endif %}
 
-	<div class="show-forms">
-		<span class="show-login-form active">Connexion</span>
-		<span class="show-forms-divider">/</span>
-		<span class="show-register-form">Inscription</span>
+	<div class="show-items">
+		<span class="show-base-item active">Connexion</span>
+		<span class="show-items-divider">|</span>
+		<span class="show-second-item">Inscription</span>
 	</div>
 
 	<form action="{{ path("fos_user_security_check") }}" method="post"
-		class="l-form login-form"
+		class="l-form login-form" id="base-item"
 	>
 
 		{% if csrf_token %}
@@ -94,7 +94,7 @@
 	</form>
 
 	{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {
-		'class': 'fos_user_registration_register r-form register-form'
+		'class': 'fos_user_registration_register r-form register-form', 'id' : 'second-item'
 	}}) }}
 
 		<div class="row">

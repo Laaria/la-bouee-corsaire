@@ -168,22 +168,22 @@ a:hover, a:focus{
 	min-height: 193px;
 }
 
-/* login/register form */
+/* Base and secondary items */
 
-.show-forms {
+.show-items {
 	padding-top: 40px;
 	font-size: 2em;
 	color: #000;
 	line-height: 26px;
 	text-align: center;
 }
-.show-register-form,
-.show-forms-divider,
-.show-login-form {
+.show-base-item,
+.show-items-divider,
+.show-second-item {
 	opacity: 0.6;
 }
-.show-register-form,
-.show-login-form {
+.show-base-item,
+.show-second-item {
 	cursor: pointer;
 	-o-transition: all .3s;
 	-moz-transition: all .3s;
@@ -191,14 +191,14 @@ a:hover, a:focus{
 	-ms-transition: all .3s;
 	transition: all .3s;
 }
-.show-register-form.active,
-.show-login-form.active,
-.show-register-form:hover,
-.show-login-form:hover {
+.show-base-item.active,
+.show-second-item.active,
+.show-base-item:hover,
+.show-second-item:hover {
 	opacity: 1;
 }
 
-.register-form {
+#second-item {
 	display: none;
 }
 /* global colors */

@@ -1,18 +1,18 @@
-$('.show-register-form').on('click', function(){
+$('.show-base-item').on('click', function(){
 	if( ! $(this).hasClass('active') ) {
-		$('.show-login-form').removeClass('active');
+		$('.show-second-item').removeClass('active');
 		$(this).addClass('active');
-		$('.login-form').fadeOut('fast', function(){
-			$('.register-form').fadeIn('fast');
+		$('#second-item').fadeOut('fast', function(){
+			$('#base-item').fadeIn('fast');
 		});
 	}
 });
-$('.show-login-form').on('click', function(){
+$('.show-second-item').on('click', function(){
 	if( ! $(this).hasClass('active') ) {
-		$('.show-register-form').removeClass('active');
+		$('.show-base-item').removeClass('active');
 		$(this).addClass('active');
-		$('.register-form').fadeOut('fast', function(){
-			$('.login-form').fadeIn('fast');
+		$('#base-item').fadeOut('fast', function(){
+			$('#second-item').fadeIn('fast');
 		});
 	}
 });
@@ -30,9 +30,9 @@ $('.register-submit').on('click', function(event){
 				$('.step-1').fadeIn('fast');
 			});
 		} else {
-			$('#alert_form_registration').show().html(errors);	
+			$('#alert_form_registration').show().html(errors);
 		}
-		
+
 	}
 	if (registerStep == 1) {
 		checkSurname($('#fos_user_registration_form_surname').val(), errors);
@@ -42,7 +42,7 @@ $('.register-submit').on('click', function(event){
 				$('.step-2').fadeIn('fast');
 			});
 		} else {
-			$('#alert_form_registration').show().html(errors);	
+			$('#alert_form_registration').show().html(errors);
 		}
 	}
 	if (registerStep == 2) {
@@ -87,7 +87,7 @@ function zipCaller(input) {
 			}
 			$('#fos_user_registration_form_adress').autocomplete({
 				source: adress,
-			
+
 				select: function (event, ui){
 					$('#fos_user_registration_form_adress').val(ui.item.label);
 					$('#fos_user_registration_form_region').val(ui.item.area);
@@ -99,7 +99,7 @@ function zipCaller(input) {
 					.append( "<div>" + item.name + "</div>" )
 					.appendTo( ul );
 				};
-			
+
 		}
 	});
 }
