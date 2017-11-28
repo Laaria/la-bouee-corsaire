@@ -324,7 +324,8 @@
 				->setTitle($this->getTitle())
 				->setDescription($this->getDescription())
 				->setLocation($this->getLocation())
-				->setLevel($this->getLevel());
+				->setLevel($this->getLevel())
+				->setIsService($this->getIsService());
 			return $task;
 		}
 	}

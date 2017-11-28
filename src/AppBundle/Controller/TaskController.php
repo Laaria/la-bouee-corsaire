@@ -260,11 +260,19 @@
 
 			$duplicated_task = $task->duplicate();
 			$formFactory = $this->get('form.factory');
-			$form = $formFactory->createNamed(
-				'new_task',
-				'AppBundle\Form\TaskType',
-				$duplicated_task
-			);
+			if ($duplicated_task->getIsService() == 0){
+				$form = $formFactory->createNamed(
+					'new_task',
+					'AppBundle\Form\TaskType',
+					$duplicated_task
+				);
+			} else {
+				$form = $formFactory->createNamed(
+					'new_task',
+					'AppBundle\Form\DemandType',
+					$duplicated_task
+				);
+			}
 
 			$form->handleRequest($request);
 			if ($form->isSubmitted() && $form->isValid()) {
