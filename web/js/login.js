@@ -120,14 +120,14 @@ function checkPassword(input,checked, erreur){
 	}
 }
 function checkName(input, erreur){
-	if (input.length <= 3 || input.length >= 100){
-		erreur.push('Votre Prénom est trop '+ ((input.length <= 3) ? 'court' : 'long')+'. ');
+	if (input.length < 3 || input.length >= 100){
+		erreur.push('Votre Prénom est trop '+ ((input.length < 3) ? 'court' : 'long')+'. ');
 	}
 
 }
 function checkSurname(input, erreur){
-	if (input.length <= 3 || input.length >= 100){
-		erreur.push('Votre Nom est trop '+ ((input.length <= 3) ? 'court' : 'long')+'. ');
+	if (input.length < 3 || input.length >= 100){
+		erreur.push('Votre Nom est trop '+ ((input.length < 3) ? 'court' : 'long')+'. ');
 	}
 }
 function checkPhone(input, erreur){
