@@ -6,6 +6,7 @@
 	use Symfony\Component\Form\FormBuilderInterface;
 	use FOS\UserBundle\Util\LegacyFormHelper;
 	use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+	use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 	/**
 	 * Base used by all forms related to Users creation/edition
@@ -78,6 +79,14 @@
 				->add('phone', null, [
 					'translation_domain' => false,
 					'label' => 'Téléphone',
+				])
+				->add('latitude', HiddenType::class, [
+					'translation_domain' => false,
+					'label' => 'Latitude',
+				])
+				->add('longitude', HiddenType::class, [
+					'translation_domain' => false,
+					'label' => 'Longitude',
 				]);
 			}
 

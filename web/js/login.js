@@ -82,7 +82,9 @@ function zipCaller(input) {
 					label: datas[i].properties.name,
 					zipCode: datas[i].properties.postcode,
 					city: datas[i].properties.city,
-					area: datas[i].properties.context.split(',')[2]
+					area: datas[i].properties.context.split(',')[2],
+					latitude: datas[i].geometry.coordinates[1],
+					longitude: datas[i].geometry.coordinates[0]
 				});
 			}
 			$('#fos_user_registration_form_adress').autocomplete({
@@ -93,6 +95,8 @@ function zipCaller(input) {
 					$('#fos_user_registration_form_region').val(ui.item.area);
 					$('#fos_user_registration_form_zip_code').val(ui.item.zipCode);
 					$('#fos_user_registration_form_city').val(ui.item.city);
+					$('#fos_user_registration_form_latitude').val(ui.item.latitude);
+					$('#fos_user_registration_form_longitude').val(ui.item.longitude);
 				}
 			}).autocomplete( "instance" )._renderItem = function( ul, item ) {
 				return $( "<li>" )
