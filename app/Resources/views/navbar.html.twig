@@ -23,7 +23,7 @@
 						</a>
 					{% else %}
 						<a class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" role="button" arial-expanded="false" href="{{ path('fos_user_profile_show') }}">
-							Mon compte 
+							{{ app.user.name }} 
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">

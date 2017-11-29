@@ -4,6 +4,14 @@
 
 {% block body %}
 
+{% for message in app.flashes('notice') %}
+	<br>
+    <div class="flash-notice alert alert-success  alert-dismissable">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ message }}
+    </div>
+{% endfor %}
+
 <div class="show-items">
 	<span class="show-base-item active">Mes besoins</span>
 	<span class="show-items-divider">|</span>
@@ -27,7 +35,7 @@
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<a href="{{ path('task_show', {'id': task.id}) }}">{{ task.title }}</a> - <a href="{{ path('task_edit', {'id': task.id}) }}">Éditer</a>
+						<a href="{{ path('task_show', {'id': task.id}) }}">{{ task.title }}</a> - <a href="{{ path('task_edit', {'id': task.id}) }}">Éditer</a> - <a href="{{ path('task_disable', {'id': task.id}) }}">Désactiver</a>
 					</div>
 					<div class="panel-body">
 						<p>{{ task.location }}</p>
@@ -75,7 +83,7 @@
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<a href="{{ path('task_show', {'id': demand.id}) }}">{{ demand.title }}</a> - <a href="{{ path('task_edit', {'id': demand.id}) }}">Éditer</a>
+						<a href="{{ path('task_show', {'id': demand.id}) }}">{{ demand.title }}</a> - <a href="{{ path('task_edit', {'id': demand.id}) }}">Éditer</a> - <a href="{{ path('task_disable', {'id': demand.id}) }}">Désactiver</a>
 					</div>
 					<div class="panel-body">
 						<p>{{ demand.location }}</p>
