@@ -187,7 +187,7 @@
 				->getDoctrine()
 				->getRepository('AppBundle:Task')
 				->findBy(
-					['user' => $user],
+					['user' => $user, 'isService' => false],
 					['date' => 'DESC']
 				);
 
@@ -211,10 +211,23 @@
 					['date' => 'DESC']
 				);
 
+				$demands_enabled = [];
+				$demands_disabled = [];
+
+			foreach ($demands as $demand) {
+				if ($demand->isDisabled()) {
+					$demands_disabled[] = $demand;
+				}
+				else {
+					$demands_enabled[] = $demand;
+				}
+			}
+
 			return $this->render('task/list-owned.html.twig', [
 				'tasks_enabled'  => $list_enabled,
 				'tasks_disabled' => $list_disabled,
-				'demands' => $demands,
+				'demands_enabled' => $demands_enabled,
+				'demands_disabled' => $demands_disabled,
 				'user'           => $user,
 			]);
 		}

@@ -71,11 +71,29 @@
 		<section class="col-md-6">
 			<h2>Services actifs</h2>
 
-			{% for demand in demands %}
+			{% for demand in demands_enabled %}
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<a href="{{ path('task_show', {'id': demand.id}) }}">{{ demand.title }}</a> - <a href="{{ path('task_edit', {'id': demand.id}) }}">Éditer</a>
+					</div>
+					<div class="panel-body">
+						<p>{{ demand.location }}</p>
+						<p>{{ demand.description }}</p>
+					</div>
+				</div>
+
+			{% endfor %}
+		</section>
+
+		<section class="col-md-6">
+			<h2>Services désactivés</h2>
+
+			{% for demand in demands_disabled %}
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						{{ demand.title }} - <a href="{{ path('task_open', {'id': demand.id}) }}">Ré-activer</a> - <a href="{{ path('task_duplicate', {'id': demand.id}) }}">Dupliquer</a>
 					</div>
 					<div class="panel-body">
 						<p>{{ demand.location }}</p>
