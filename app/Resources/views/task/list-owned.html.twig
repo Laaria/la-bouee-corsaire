@@ -41,7 +41,7 @@
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						{{ task.title }} - <a href="{{ path('task_open', {'id': task.id}) }}">Ré-activer</a>
+						{{ task.title }} - <a href="{{ path('task_open', {'id': task.id}) }}">Ré-activer</a> - <a href="{{ path('task_duplicate', {'id': task.id}) }}">Dupliquer</a>
 					</div>
 					<div class="panel-body">
 						<p>{{ task.location }}</p>

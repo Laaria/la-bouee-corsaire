@@ -255,10 +255,11 @@
 		 */
 		public function duplicateAction(Request $request, $id) {
 			$user = $this->getAuthenticatedUser();
-			$task = $this->getById('Task', $id);
+			$task = $this->getById('Task', $id, false);
 			$this->checkOwnership($task);
 
 			$duplicated_task = $task->duplicate();
+			$duplicated_task->setEnabled(true);
 			$formFactory = $this->get('form.factory');
 			if ($duplicated_task->getIsService() == 0){
 				$form = $formFactory->createNamed(
