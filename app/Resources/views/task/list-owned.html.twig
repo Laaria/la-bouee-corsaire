@@ -23,7 +23,7 @@
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<a href="{{ path('task_edit', {'id': task.id}) }}">{{ task.title }}</a>
+						<a href="{{ path('task_show', {'id': task.id}) }}">{{ task.title }}</a> - <a href="{{ path('task_edit', {'id': task.id}) }}">Éditer</a>
 					</div>
 					<div class="panel-body">
 						<p>{{ task.location }}</p>
