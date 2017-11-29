@@ -327,10 +327,12 @@
 			$task->disable();
 			$this->getDoctrine()->getManager()->flush();
 
-			//TODO task disabling confirmation page
-			return new Response(
-				'<p>Task with id '.$task->getId().' has been disabled.</p>'
+			$this->addFlash(
+				'notice',
+				'La tâche ' . $task->getTitle() . ' a été désactivée.'
 			);
+
+			return $this->redirectToRoute('task_list_owned');
 		}
 
 		/**
