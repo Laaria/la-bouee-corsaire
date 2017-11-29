@@ -174,6 +174,64 @@
 		}
 
 		/**
+		 * Show list of Tasks with range limitation
+		 *
+		 * @Route("/list/{range}", name="task_list_range")
+		 *
+		 * @return Response
+		 */
+		public function listRangeAction(Request $request, $range) {
+
+			$user = $this->getAuthenticatedUser();
+			$userLat = $user->getLatitude();
+			$userLong = $user->getLongitude();
+
+			$CIRCONF = 40075017; // circonférence de la terre en mètres*
+			$latDiff =  360 * $range / $CIRCONF;
+			$longDiff = 360 * $range / ($CIRCONF * cos(deg2rad($userLat)));
+			$latMin = $userLat - $latDiff;
+			$latMax = $userLat + $latDiff;
+			var_dump($longDiff);
+/*
+			$repository = $this->getDoctrine()->getRepository('AppBundle:Task');
+			$query = $repository->createQueryBuilder('p')
+			    ->where('p.latitude > :latMin')
+			    ->andWhere('p.latitude < :latMax')
+			    ->andWhere('p.longitude > :longMin')
+			    ->andWhere('p.longitude < :longMax')
+			    ->setParameter('latMin', $latMin)
+			    ->setParameter('latMax', $latMax)
+			    ->setParameter('longMin', $longMin)
+			    ->setParameter('longMax', $LongMax)
+			    ->orderBy('p.price', 'ASC')
+			    ->getQuery();
+
+			$task = $query->getResult();
+*/
+
+			$tasks = $this
+				->getDoctrine()
+				->getRepository('AppBundle:Task')
+				->findBy(
+					['isService' => false, 'enabled' => true],
+					['date' => 'DESC']
+				);
+			$demands = $this
+				->getDoctrine()
+				->getRepository('AppBundle:Task')
+				->findBy(
+					['enabled' => true, 'isService' => true],
+					['date' => 'DESC']
+				);
+
+			return $this->render('task/list.html.twig', [
+				'tasks' => $tasks,
+				'demands' => $demands,
+				'user' => $this->getUser(),
+			]);
+		}
+
+		/**
 		 * Show list of Tasks owned by current User
 		 *
 		 * @Route("/list-owned", name="task_list_owned")
