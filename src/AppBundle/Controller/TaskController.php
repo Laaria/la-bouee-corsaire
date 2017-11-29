@@ -203,9 +203,18 @@
 				}
 			}
 
+			$demands = $this
+				->getDoctrine()
+				->getRepository('AppBundle:Task')
+				->findBy(
+					['user' => $user, 'isService' => true],
+					['date' => 'DESC']
+				);
+
 			return $this->render('task/list-owned.html.twig', [
 				'tasks_enabled'  => $list_enabled,
 				'tasks_disabled' => $list_disabled,
+				'demands' => $demands,
 				'user'           => $user,
 			]);
 		}
