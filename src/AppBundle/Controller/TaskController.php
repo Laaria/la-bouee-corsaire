@@ -358,6 +358,21 @@
 			]);
 		}
 
+		/**
+		 * [searchTask description]
+		 *
+		 * @Route("/search", name="search_task")
+		 * @param  Request $request [description]
+		 * @return [type]           [description]
+		 */
+		public function searchTask(Request $request)
+		{
+
+			return new Response(
+					$toto
+				);
+		}
+
 
 
 	}
