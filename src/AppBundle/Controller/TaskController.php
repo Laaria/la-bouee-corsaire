@@ -171,7 +171,7 @@
 		/**
 		 * Search From nav
 		 *
-		 * @Route("/search/nav", name="search_task_nav")
+		 * @Route("/search", name="search_task_nav")
 		 *
 		 */
 
