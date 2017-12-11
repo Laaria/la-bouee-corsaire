@@ -11,6 +11,9 @@
 	use Symfony\Component\HttpFoundation\Response;
 	use Psr\Log\LoggerInterface;
 
+	use Symfony\Component\Form\Extension\Core\Type\TextType;
+	use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 	/**
 	 * Task-related operations
 	 *
@@ -150,24 +153,44 @@
 		 *
 		 * @return Response
 		 */
-		public function listAction() {
+		public function listAction()
+		{
 			$tasks = $this
 				->getDoctrine()
 				->getRepository('AppBundle:Task')
 				->findBy(['enabled' => true],
 					['date' => 'DESC']
 				);
-			$demands = $this
-				->getDoctrine()
-				->getRepository('AppBundle:Task')
-				->findBy(
-					['enabled' => true, 'isService' => true],
-					['date' => 'DESC']
-				);
 
 			return $this->render('task/list.html.twig', [
 				'tasks' => $tasks,
-				'demands' => $demands,
+				'user' => $this->getUser(),
+			]);
+		}
+
+		/**
+		 * Search From nav
+		 *
+		 * @Route("/search/nav", name="search_task_nav")
+		 *
+		 */
+
+		public function navSearch(Request $request)
+		{
+			$search = $request->request->get('search');
+			$em = $this->getDoctrine()->getManager();
+			$repository = $em->getRepository('AppBundle\Entity\Task');
+			$query = $repository->createQueryBuilder('p')
+				->where('p.title LIKE :word')
+				->orWhere('p.description LIKE :word')
+				->andWhere('p.enabled = :enabled')
+				->setParameter('word', '%'.$search.'%')
+				->setParameter('enabled', 1)
+				->getQuery();
+			$tasks = $query->getResult();
+
+			return $this->render('task/list.html.twig', [
+				'tasks' => $tasks,
 				'user' => $this->getUser(),
 			]);
 		}
@@ -207,7 +230,7 @@
 			$list = $query->getResult();
 
 			foreach ($list as $key => $task) {
-				if($task['isService']) 
+				if($task['isService'])
 			}
 
 */
@@ -419,20 +442,7 @@
 			]);
 		}
 
-		/**
-		 * [searchTask description]
-		 *
-		 * @Route("/search", name="search_task")
-		 * @param  Request $request [description]
-		 * @return [type]           [description]
-		 */
-		public function searchTask(Request $request)
-		{
 
-			return new Response(
-					$toto
-				);
-		}
 
 
 
