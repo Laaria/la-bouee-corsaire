@@ -154,8 +154,7 @@
 			$tasks = $this
 				->getDoctrine()
 				->getRepository('AppBundle:Task')
-				->findBy(
-					['isService' => false, 'enabled' => true],
+				->findBy(['enabled' => true],
 					['date' => 'DESC']
 				);
 			$demands = $this
@@ -186,12 +185,11 @@
 			$userLat = $user->getLatitude();
 			$userLong = $user->getLongitude();
 
-			$CIRCONF = 40075017; // circonférence de la terre en mètres*
+			$CIRCONF = 40075; // circonférence de la terre en mètres*
 			$latDiff =  360 * $range / $CIRCONF;
 			$longDiff = 360 * $range / ($CIRCONF * cos(deg2rad($userLat)));
 			$latMin = $userLat - $latDiff;
 			$latMax = $userLat + $latDiff;
-			var_dump($longDiff);
 /*
 			$repository = $this->getDoctrine()->getRepository('AppBundle:Task');
 			$query = $repository->createQueryBuilder('p')
@@ -206,14 +204,19 @@
 			    ->orderBy('p.price', 'ASC')
 			    ->getQuery();
 
-			$task = $query->getResult();
+			$list = $query->getResult();
+
+			foreach ($list as $key => $task) {
+				if($task['isService']) 
+			}
+
 */
 
 			$tasks = $this
 				->getDoctrine()
 				->getRepository('AppBundle:Task')
 				->findBy(
-					['isService' => false, 'enabled' => true],
+					['enabled' => true],
 					['date' => 'DESC']
 				);
 			$demands = $this
