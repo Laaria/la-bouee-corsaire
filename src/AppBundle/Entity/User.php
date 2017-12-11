@@ -5,6 +5,9 @@
 	use Doctrine\ORM\Mapping as ORM;
 	use FOS\UserBundle\Model\User as BaseUser;
 	use Symfony\Component\Validator\Constraints as Assert;
+
+	use Doctrine\Common\Collections\Collection;
+	use Doctrine\Common\Collections\ArrayCollection;
 	/**
 	 * Registered Users
 	 *
@@ -24,6 +27,16 @@
 		 * @access protected
 		 */
 		protected $id;
+
+		/**
+	     * Many Users have Many Address.
+	     * @ORM\ManyToMany(targetEntity="Address")
+	     * @ORM\JoinTable(name="users_addresses",
+	     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+	     *      inverseJoinColumns={@ORM\JoinColumn(name="address_id", referencedColumnName="id")}
+	     *      )
+	     */
+	    private $addresses;
 
 		/**
 		 * Name
@@ -232,6 +245,10 @@
 		 * @access protected
 		 */
 		protected $sponsor;
+
+		public function __construct() {
+	        $this->addresses = new \Doctrine\Common\Collections\ArrayCollection();
+	    }
 
 		/**
 		 * Return name
