@@ -31,7 +31,7 @@
 		/**
 	     * Many Users have Many Address.
 	     * @ORM\ManyToMany(targetEntity="Address")
-	     * @ORM\JoinTable(name="users_addresses",
+	     * @ORM\JoinTable(name="bouee_users_addresses",
 	     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
 	     *      inverseJoinColumns={@ORM\JoinColumn(name="address_id", referencedColumnName="id")}
 	     *      )
