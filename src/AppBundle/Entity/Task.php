@@ -88,6 +88,12 @@
 		protected $location;
 
 		/**
+	     * @ORM\ManyToOne(targetEntity="Address")
+	     * @ORM\JoinColumn(name="address_id", referencedColumnName="id")
+	     */
+	    private $address;
+
+		/**
 		 * Owner
 		 *
 		 * @ORM\ManyToOne(targetEntity="User")
