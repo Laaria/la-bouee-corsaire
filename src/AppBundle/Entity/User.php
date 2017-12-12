@@ -623,6 +623,11 @@
 			return (!$this->isEnabled());
 		}
 
+		public function getProperName()
+		{
+			return $this->getName() . ' ' . $this->getSurname()[0];
+		}
+
 	}
 
 ?>
