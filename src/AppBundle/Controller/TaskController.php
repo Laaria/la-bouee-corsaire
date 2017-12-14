@@ -10,6 +10,7 @@
 	use Symfony\Component\HttpFoundation\Request;
 	use Symfony\Component\HttpFoundation\Response;
 	use Psr\Log\LoggerInterface;
+	use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 	use Symfony\Component\Form\Extension\Core\Type\TextType;
 	use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -94,11 +95,15 @@
 
 			$formFactory = $this->get('form.factory');
 
+			$option['addresses'] = $user->getListAddresses();
+
+			//$option['addresses'] = [];
 			$task = new Task;
 			$form = $formFactory->createNamed(
 				'new_task',
 				'AppBundle\Form\TaskType',
-				$task
+				$task,
+				$option
 			);
 
 			$form->handleRequest($request);
@@ -128,11 +133,14 @@
 
 			$formFactory = $this->get('form.factory');
 
+			$option['addresses'] = $user->getListAddresses();
+
 			$task = new Task;
 			$form = $formFactory->createNamed(
 				'new_task',
 				'AppBundle\Form\DemandType',
-				$task
+				$task,
+				$option
 			);
 
 			$form->handleRequest($request);
@@ -331,11 +339,14 @@
 			$task = $this->getById('Task', $id);
 			$this->checkOwnership($task);
 
+			$option['addresses'] = $user->getListAddresses();
+
 			$formFactory = $this->get('form.factory');
 			$form = $formFactory->createNamed(
 				'edit_task',
 				'AppBundle\Form\TaskType',
-				$task
+				$task,
+				$option
 			);
 
 			$form->handleRequest($request);
@@ -364,6 +375,8 @@
 			$task = $this->getById('Task', $id, false);
 			$this->checkOwnership($task);
 
+			$option['addresses'] = $user->getListAddresses();
+
 			$duplicated_task = $task->duplicate();
 			$duplicated_task->setEnabled(true);
 			$formFactory = $this->get('form.factory');
@@ -371,13 +384,15 @@
 				$form = $formFactory->createNamed(
 					'new_task',
 					'AppBundle\Form\TaskType',
-					$duplicated_task
+					$duplicated_task,
+					$option
 				);
 			} else {
 				$form = $formFactory->createNamed(
 					'new_task',
 					'AppBundle\Form\DemandType',
-					$duplicated_task
+					$duplicated_task,
+					$option
 				);
 			}
 

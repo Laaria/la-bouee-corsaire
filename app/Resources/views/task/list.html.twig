@@ -36,7 +36,7 @@
 							<a href="{{ path('task_show', {'id': task.id}) }}">{{ task.title }}</a>
 						</div>
 						<div class="panel-body">
-							<p>{{ task.location }}</p>
+							<p>{{ task.address.getFullAddress() }}</p>
 							<p>{{ task.description }}</p>
 						</div>
 					</div>
@@ -74,7 +74,7 @@
 							<a href="{{ path('task_show', {'id': demand.id}) }}">{{ demand.title }}</a>
 						</div>
 						<div class="panel-body">
-							<p>{{ demand.location }}</p>
+							<p>{{ demand.address.getFullAddress() }}</p>
 							<p>{{ demand.description }}</p>
 						</div>
 					</div>

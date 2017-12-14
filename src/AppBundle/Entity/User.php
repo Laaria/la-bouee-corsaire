@@ -346,6 +346,28 @@
 		}
 
 		/**
+		 * Return Addresses
+		 *
+		 * @return float
+		 */
+		public function getAddresses() {
+			return $this->addresses;
+		}
+
+		/** 
+		 * Return list of user's address
+		 * 
+		 * @return array of id with string of full addresses for key
+		 */
+		public function getListAddresses() {
+			$retour = [];
+			foreach ($this->addresses as $value) {
+				$retour[$value->getFullAddress()] = $value;
+			}
+			return $retour;
+		}
+
+		/**
 		 * Set password (encrypted)
 		 *
 		 * @param string $password

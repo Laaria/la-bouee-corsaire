@@ -179,6 +179,19 @@
 		public function getLongitude() { return $this->longitude; }
 
 		/**
+		 * Return full address : address zip_code city
+		 *
+		 * @return string
+		 */
+		public function getFullAddress() {
+			$adr = $this->getAddress().' '
+					.$this->getZipCode().' '
+					.$this->getCity();
+
+			return $adr;
+		}
+
+		/**
 		 * Set address
 		 *
 		 * @param string $address
