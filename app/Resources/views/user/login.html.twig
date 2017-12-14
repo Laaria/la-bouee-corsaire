@@ -110,10 +110,7 @@
 						{{ form_errors(form.plainPassword.second) }}
 						{{ form_errors(form.name) }}
 						{{ form_errors(form.surname) }}
-						{{ form_errors(form.adress) }}
-						{{ form_errors(form.region) }}
-						{{ form_errors(form.city) }}
-						{{ form_errors(form.phone) }}
+						{{ form_errors(form.phone) }} 
 					</div>
 
 					<div class="panel-body">
@@ -186,46 +183,18 @@
 												}}) }}
 											</td>
 										</tr>
+	
 										<tr class="step-2" style="display: none;">
 											<td>
-												{{ form_label(form.adress) }}
+												{{ form_label(form.addresses) }}
 											</td>
 											<td>
-												{{ form_widget(form.adress, {'attr': {
+												{{ form_widget(form.addresses, {'attr': {
 													'class': 'form-control'
 												}}) }}
 											</td>
 										</tr>
-										<tr class="step-2" style="display: none;">
-											<td>
-												{{ form_label(form.region) }}
-											</td>
-											<td>
-												{{ form_widget(form.region, {'attr': {
-													'class': 'form-control'
-												}}) }}
-											</td>
-										</tr>
-										<tr class="step-2" style="display: none;">
-										<td>
-											{{ form_label(form.zip_code) }}
-										</td>
-										<td>
-											{{ form_widget(form.zip_code,{'attr': {
-												'class': 'form-control'
-											}}) }}
-										</td>
-										</tr>
-										<tr class="step-2" style="display: none;">
-											<td>
-												{{ form_label(form.city) }}
-											</td>
-											<td>
-												{{ form_widget(form.city, {'attr': {
-													'class': 'form-control'
-												}}) }}
-											</td>
-										</tr>
+
 										<tr class="step-2" style="display: none;">
 											<td>
 												{{ form_label(form.phone) }}

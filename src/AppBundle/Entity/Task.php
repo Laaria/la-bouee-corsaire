@@ -242,12 +242,12 @@
 		/**
 		 * Set address
 		 *
-		 * @param int
+		 * @param Address object
 		 *
 		 * @return Task
 		 */
-		public function setAddress($address_id) {
-			$this->address = $address_id;
+		public function setAddress($address) {
+			$this->address = $address;
 
 			return $this;
 		}

@@ -3,6 +3,7 @@
 	namespace AppBundle\Controller;
 
 	use AppBundle\Entity\User;
+	use AppBundle\Entity\Address;
 	use FOS\UserBundle\Event\GetResponseUserEvent;
 	use FOS\UserBundle\Event\FilterUserResponseEvent;
 	use FOS\UserBundle\Event\FormEvent;
@@ -32,6 +33,7 @@
 		 * @return Response
 		 */
 		public function loginAction(Request $request) {
+				
 			/** @var $formFactory FactoryInterface */
 			$formFactory = $this->get('fos_user.registration.form.factory');
 			/** @var $userManager UserManagerInterface */
@@ -127,7 +129,9 @@
 			EventDispatcherInterface $dispatcher,
 			UserManagerInterface $userManager,
 			User $user
+
 		) {
+				
 			if ($form->isValid()) {
 				$event = new FormEvent($form, $request);
 				$dispatcher->dispatch(
@@ -136,6 +140,24 @@
 				);
 
 				$userManager->updateUser($user);
+
+			
+				foreach ($request as $key => $value) {
+					error_log("Request [$key] = $value");
+				}
+
+				$address = new Address($request);
+
+				// $address->setAddress($user->getAdress());
+				// $address->setRegion($user->getRegion());
+				// $address->setZipCode($user->getZipCode());
+				// $address->setCity($user->getCity());
+				// $address->setLatitude($user->getLatitude());
+				// $address->setLongitude($user->getLongitude());
+
+				$em = $this->getDoctrine()->getManager();
+				$em->persist($address);
+				$em->flush();
 
 				// If this is the first User created, give it administration rights
 				if ($user->getId() == 1) {

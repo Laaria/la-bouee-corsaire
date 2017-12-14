@@ -26,6 +26,16 @@
 		protected $id;
 
 		/**
+	     * Many Address have Many Users.
+	     * @ORM\ManyToMany(targetEntity="User")
+	     * @ORM\JoinTable(name="bouee_users_addresses",
+	     *      joinColumns={@ORM\JoinColumn(name="address_id", referencedColumnName="id")},
+	     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+	     *      )
+	     */
+	    protected $users;
+
+		/**
 		 * Physical address
 		 *
 		 * @ORM\Column(type="text", length=255)
@@ -129,6 +139,12 @@
 		 */
 		protected $longitude;
 
+		public function __construct($request) {
+	        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+	        //$this->hydrate($request);
+
+	    }
+
 		/**
 		 * Return id
 		 *
@@ -189,6 +205,26 @@
 					.$this->getCity();
 
 			return $adr;
+		}
+
+		/**
+		 * Return users
+		 *
+		 * @return array
+		 */
+		public function getUsers() { return $this->users; }
+
+		/**
+		 * Set user
+		 *
+		 * @param int $user_id
+		 *
+		 * @return User
+		 */
+		public function setUser($user_id) {
+			$this->user = $user_id;
+
+			return $this;
 		}
 
 		/**

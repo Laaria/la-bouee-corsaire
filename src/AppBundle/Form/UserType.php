@@ -7,7 +7,8 @@
 	use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 	use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 	use Symfony\Component\Form\Extension\Core\Type\EmailType;
-
+	use AppBundle\Form\AddressType;
+	use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 	/**
 	 * Base used by all forms related to Users creation/edition
 	 */
@@ -56,38 +57,42 @@
 					'attr' => ['readonly' => true],
 					'translation_domain' => false,
 					'label' => 'Parrain',
-				])
-				->add('adress', null, [
-					'translation_domain' => false,
-					'label' => 'Adresse',
-				])
-				->add('region', null, [
-					'attr' => ['readonly' => true],
-					'translation_domain' => false,
-					'label' => 'Région',
-				])
-				->add('zip_code', null, [
-					'attr' => ['readonly' => true],
-					'translation_domain' => false,
-					'label' => 'Code Postal',
-					])
-				->add('city', null, [
-					'attr' => ['readonly'=> true],
-					'translation_domain' => false,
-					'label' => 'Ville',
+				 ])
+				// ->add('adress', null, [
+				// 	'translation_domain' => false,
+				// 	'label' => 'Adresse',
+				// ])
+				// ->add('region', null, [
+				// 	'attr' => ['readonly' => true],
+				// 	'translation_domain' => false,
+				// 	'label' => 'Région',
+				// ])
+				// ->add('zip_code', null, [
+				// 	'attr' => ['readonly' => true],
+				// 	'translation_domain' => false,
+				// 	'label' => 'Code Postal',
+				// 	])
+				// ->add('city', null, [
+				// 	'attr' => ['readonly'=> true],
+				// 	'translation_domain' => false,
+				// 	'label' => 'Ville',
+				// ])
+				->add('addresses', CollectionType::class, [
+					'entry_type' => AddressType::class,
+					'entry_options' => array('label' => false)
 				])
 				->add('phone', null, [
 					'translation_domain' => false,
 					'label' => 'Téléphone',
-				])
-				->add('latitude', HiddenType::class, [
-					'translation_domain' => false,
-					'label' => 'Latitude',
-				])
-				->add('longitude', HiddenType::class, [
-					'translation_domain' => false,
-					'label' => 'Longitude',
 				]);
+				// ->add('latitude', HiddenType::class, [
+				// 	'translation_domain' => false,
+				// 	'label' => 'Latitude',
+				// ])
+				// ->add('longitude', HiddenType::class, [
+				// 	'translation_domain' => false,
+				// 	'label' => 'Longitude',
+				// ]);
 			}
 
 	}
